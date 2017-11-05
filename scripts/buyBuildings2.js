@@ -13,7 +13,7 @@ var value = parseInt(value, 10);
 var sawmillAmount = value;
 
 if (sawmillAmount >= lumberjackAmount) {
-document.getElementById('alert').innerHTML = 'Need more Lumberjacks!';
+document.getElementById('alert').innerHTML = '需要更多的伐木工人！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
@@ -68,7 +68,7 @@ var value = parseInt(value, 10);
 var beneAmount = value;
 
 if (beneAmount >= ironMinerAmount) {
-document.getElementById('alert').innerHTML = 'Need more Iron Miners!';
+document.getElementById('alert').innerHTML = '需要更多的铁矿工！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
@@ -123,7 +123,7 @@ var value = parseInt(value, 10);
 var electroAmount = value;
 
 if (electroAmount >= copperMinerAmount) {
-document.getElementById('alert').innerHTML = 'Need more Copper Miners!';
+document.getElementById('alert').innerHTML = '需要更多铜矿工！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
@@ -194,7 +194,7 @@ var value = parseInt(value, 10);
 var smelteryAmount = value;
 
 if (smelteryAmount >= goldMinerAmount) {
-document.getElementById('alert').innerHTML = 'Need more Gold Miners!';
+document.getElementById('alert').innerHTML = '需要更多的金矿！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else

@@ -1,1579 +1,1735 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="custom_font/specimen_files/specimen_stylesheet.css" type="text/css" charset="utf-8">
-<link rel="stylesheet" href="custom_font/stylesheet.css" type="text/css" charset="utf-8">
-<title>The Resource Game - Idle Game, Clicker Game, Incremental</title>
-<meta name="description" content="Click planet Earth to gather resources which can be used to hire workers, buy tools, and build machines in this addicting idle game.">
-  <script type="text/javascript"
- src="scripts/jquery-1.7.2.min.js"></script>
+<html>
+  
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="custom_font/specimen_files/specimen_stylesheet.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="custom_font/stylesheet.css" type="text/css" charset="utf-8">
+    <title>资源游戏 - 休闲游戏，点击游戏，增量</title>
+    <meta name="description" content="Click planet Earth to gather resources which can be used to hire workers, buy tools, and build machines in this addicting idle game.">
+    <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="scripts/buyBuildings2.js"></script>
+    <script type="text/javascript" src="scripts/buyPowerups.js"></script>
+    <script type="text/javascript" src="scripts/buyTechnologies3.js"></script>
+    <script type="text/javascript" src="scripts/buyTools2.js"></script>
+    <script type="text/javascript" src="scripts/buyWorkers2.js"></script>
+    <script type="text/javascript" src="scripts/clickFunctions3.js"></script>
+    <script type="text/javascript" src="scripts/gameLoad5.js"></script>
+    <script type="text/javascript" src="scripts/objectives3.js"></script>
+    <script type="text/javascript" src="scripts/saveGame6.js"></script>
+    <script type="text/javascript" src="scripts/trade2.js"></script>
+    <link rel="stylesheet" href="scripts/style2.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="scripts/earth.css" type="text/css" charset="utf-8">
+    <style type="text/css">.rotate2 { position: absolute; top: -25px; left: -25px; width: 350px; background-image: url('images/earth-effect-2.png'); height: 350px; -webkit-animation:spin 50s linear infinite; -moz-animation:spin 50s linear infinite; animation:spin 50s linear infinite; } @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } } @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } } .iframe { width: 800px; height: 320px; position: fixed; background color: white; left: 50%; margin-left: -400px; top: 50px; z-index: 50; box-shadow: 0px 0px 5px #222222; border: 2px solid silver; } .advert { width: 728px; height: 90px; position: absolute; left: 50%; margin-left: -364px; top: 630px; z-index: 5001; box-shadow: 0px 0px 5px #222222; text-align: right; } .opacity { opacity:1.0; filter:alpha(opacity=100); color: black; } .clear { opacity:1.0; filter:alpha(opacity=100); color: black; } .gemHover:hover + div { display: block; }</style>
+    <script type="text/javascript">//
+      //Hide and Show Toggler
+      //
+      function toggle(id) {
+        var e = document.getElementById(id);
+        if (e.style.display == 'block') {
+          e.style.display = 'none';
+        } else {
+          e.style.display = 'block';
+        }
+        if (id == "powerups_holder") {
+          if (e.style.display == 'block') {
+            document.getElementById('objectives_holder').style.height = '285px';
+            document.getElementById('objectives_holder').style.top = '315px';
+          } else {
+            document.getElementById('objectives_holder').style.height = '500px';
+            document.getElementById('objectives_holder').style.top = '100px';
+          }
+        }
+      }
+      //
+      //Hide and Show Visit Earth
+      //
+      function toggleVisit() {
+        var e = document.getElementById('iframe');
+        if (e.style.display == 'block') {
+          e.style.display = 'none';
+          document.getElementById("iframeButton").innerHTML = "Visit Earth";
+        } else {
+          e.style.display = 'block';
+          document.getElementById("iframeButton").innerHTML = "Leave Earth";
+        }
+      }
+      //
+      //Commas
+      //
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+      //
+      //Delete Game
+      //
+      function deleteGame() {
+        var r = confirm("You are about to delete all progress. Do you want to continue?");
+        if (r == true) {
+          localStorage.clear();
+          window.close();
+        }
+      }
+      //
+      //On Load, Run Game
+      //
+      function gameRun() {
+        //
+        //Save Game Every 1 Minute
+        //
+        setInterval(function() {
+          saveGame()
+        },
+        60000);
+        //
+        setInterval(function() {
+          objective1()
+        },
+        1000);
+        setInterval(function() {
+          objective2()
+        },
+        1000);
+        setInterval(function() {
+          objective3()
+        },
+        1000);
+        setInterval(function() {
+          objective4()
+        },
+        1000);
+        setInterval(function() {
+          objective5()
+        },
+        1000);
+        setInterval(function() {
+          objective6()
+        },
+        1000);
+        setInterval(function() {
+          objective7()
+        },
+        1000);
+        setInterval(function() {
+          objective8()
+        },
+        1000);
+        setInterval(function() {
+          objective9()
+        },
+        1000);
+        setInterval(function() {
+          objective10()
+        },
+        1000);
+        setInterval(function() {
+          objective11()
+        },
+        1000);
+        setInterval(function() {
+          objective12()
+        },
+        1000);
+        setInterval(function() {
+          objective13()
+        },
+        1000);
+        setInterval(function() {
+          objective14()
+        },
+        1000);
+        setInterval(function() {
+          objective15()
+        },
+        1000);
+        setInterval(function() {
+          objective16()
+        },
+        1000);
+        setInterval(function() {
+          objective17()
+        },
+        1000);
+        setInterval(function() {
+          objective18()
+        },
+        1000);
+        setInterval(function() {
+          objective19()
+        },
+        1000);
+        setInterval(function() {
+          objective20()
+        },
+        1000);
+        setInterval(function() {
+          objective21()
+        },
+        1000);
+        setInterval(function() {
+          objective23()
+        },
+        1000);
+        setInterval(function() {
+          objective24()
+        },
+        1000);
+        setInterval(function() {
+          objective25()
+        },
+        1000);
+        //
+        //
+        setInterval(function() {
+          clickWood()
+        },
+        250);
+        setInterval(function() {
+          clickIron()
+        },
+        250);
+        setInterval(function() {
+          clickCopper()
+        },
+        250);
+        setInterval(function() {
+          clickGold()
+        },
+        250);
+        setInterval(function() {
+          clickDiamond()
+        },
+        250);
+      }
 
-<script type="text/javascript" src="scripts/buyBuildings2.js"></script>
-<script type="text/javascript" src="scripts/buyPowerups.js"></script>
-<script type="text/javascript" src="scripts/buyTechnologies3.js"></script>
-<script type="text/javascript" src="scripts/buyTools2.js"></script>
-<script type="text/javascript" src="scripts/buyWorkers2.js"></script>
-<script type="text/javascript" src="scripts/clickFunctions3.js"></script>
-<script type="text/javascript" src="scripts/gameLoad5.js"></script>
-<script type="text/javascript" src="scripts/objectives3.js"></script>
-<script type="text/javascript" src="scripts/saveGame6.js"></script>
-<script type="text/javascript" src="scripts/trade2.js"></script>
-<link rel="stylesheet" href="scripts/style2.css" type="text/css" charset="utf-8">
-<link rel="stylesheet" href="scripts/earth.css" type="text/css" charset="utf-8">
-<style type="text/css">.rotate2 {
-position: absolute;
-top: -25px;
-left: -25px;
-width: 350px;
-background-image: url('images/earth-effect-2.png');
-height: 350px;
--webkit-animation:spin 50s linear infinite;
--moz-animation:spin 50s linear infinite;
-animation:spin 50s linear infinite;
-}
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+      //
+      //Fancy Graphics
+      //
+      function fancyGraphics() {
+        if (document.getElementById("graphics").checked == true) {
+          document.getElementById('earthGraphics').innerHTML = '<div class="stage"><figure class="ball" onclick="clickEarth();"></figure></div><div class="rotate2"></div>';
+        }
+        if (document.getElementById("graphics").checked == false) {
+          document.getElementById('earthGraphics').innerHTML = '<img class="earth" style="position: relative; z-index: 5;" alt="EARTH" src="images/earth.png" onclick="clickEarth();">';
+        }
+      }</script>
+  </head>
+  
+  <body style="color: rgb(0, 0, 0); background-color: rgb(35, 35, 35);" onload="gameRun(); gameLoad();" alink="#000099" link="#000099" vlink="#990099">
+    <div style="width: 30%; height: 600px; text-align: center; margin-right: auto;">
+      <div id="earthGraphics" style="text-align: center; width: 310px; height: 310px; position: relative; margin-left: auto; margin-right: auto; top: 25px;cursor: pointer;">
+        <div class="stage" style="cursor: pointer;">
+          <figure class="ball" onclick="clickEarth();" style="cursor: pointer;"></figure>
+        </div>
+        <div class="rotate2" style="cursor: pointer;"></div>
+      </div>
+      <div class="rounded" style="padding-top: 0px; position: relative; top: 30px; width: 250px; height: 285px; background-color: white; margin-left: auto; margin-right: auto; text-align: right;cursor: pointer;">
+        <br>
+        <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+          <tbody>
+            <tr>
+              <td style="text-align: center;">
+                <img style="width: 40px; height: 40px;" alt="" src="images/wood-icon.png"></td>
+              <td style="vertical-align: middle;">
+                <span style="color: rgb(100, 100, 100);">木头</span>
+                <span id="woodAdd"></span>
+                <br>
+                <input class="input" id="wood" value="0" readonly="readonly" type="text"></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">
+                <img style="width: 40px; height: 40px;" alt="" src="images/iron-icon.png"></td>
+              <td style="vertical-align: middle;">
+                <span style="color: rgb(100, 100, 100);">铁</span>
+                <span id="ironAdd"></span>
+                <br>
+                <input class="input" id="iron" value="0" readonly="readonly" type="text"></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">
+                <img style="width: 40px; height: 40px;" alt="" src="images/copper-icon.png"></td>
+              <td style="vertical-align: middle;">
+                <span style="color: rgb(100, 100, 100);">铜</span>
+                <span id="copperAdd"></span>
+                <br>
+                <input class="input" id="copper" value="0" readonly="readonly" type="text"></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">
+                <img style="width: 40px; height: 40px; vertical-align: middle;" alt="" src="images/gold-icon.png"></td>
+              <td style="vertical-align: middle;">
+                <span style="color: rgb(100, 100, 100);">黄金</span>
+                <span id="goldAdd"></span>
+                <br>
+                <input class="input" id="gold" value="0" readonly="readonly" type="text"></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">
+                <img style="width: 40px; height: 40px;" alt="" src="images/diamond-icon.png"></td>
+              <td style="vertical-align: middle;">
+                <span style="color: rgb(100, 100, 100);">钻石</span>
+                <span id="diamondAdd"></span>
+                <br>
+                <input class="input" id="diamond" value="0" readonly="readonly" type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table style="text-align: center; width: 250px;" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td class="opacity" id="benitoiteTd">
+                <img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/benitoite-icon.png">
+                <div class="hidden">稀有宝石：贝诺特
+                  <br>
+                  <span style="font-size: 14px; color: red;">只能通过访问地球找到。</span></div>
+                <br>
+                <input style="width: 40px; position: relative; top: -13px;" class="input" id="benitoite" value="0" readonly="readonly" type="text"></td>
+              <td class="opacity" id="blackOpalTd">
+                <img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/black-opal-icon.png">
+                <div class="hidden">罕见的宝石：黑色蛋白石
+                  <br>
+                  <span style="font-size: 14px; color: red;">只能通过访问地球找到。</span></div>
+                <br>
+                <input style="width: 40px; position: relative; top: -13px;" class="input" id="blackOpal" value="0" readonly="readonly" type="text"></td>
+              <td class="opacity" id="emeraldTd">
+                <img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/emerald-icon.png">
+                <div class="hidden">罕见的宝石：祖母绿
+                  <br>
+                  <span style="font-size: 14px; color: red;">只能通过访问地球找到。</span></div>
+                <br>
+                <input style="width: 40px; position: relative; top: -13px;" class="input" id="emerald" value="0" readonly="readonly" type="text"></td>
+              <td class="opacity" id="painiteTd">
+                <img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/painite-icon.png">
+                <div class="hidden">罕见的宝石：潘妮特
+                  <br>
+                  <span style="font-size: 14px; color: red;">只能通过访问地球找到。</span></div>
+                <br>
+                <input style="width: 40px; position: relative; top: -13px;" class="input" id="painite" value="0" readonly="readonly" type="text"></td>
+              <td class="opacity" id="redDiamondTd">
+                <img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/red-diamond-icon.png">
+                <div class="hidden">稀有宝石：红钻石
+                  <br>
+                  <span style="font-size: 14px; color: red;padding-top:10px;">只能通过访问地球找到。</span></div>
+                <br>
+                <input style="width: 40px; position: relative; top: -13px;" class="input" id="redDiamond" value="0" readonly="readonly" type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rounded" style="padding: 10px; top: -590px; background-color: white; width: 30%; position: relative; text-align: right; margin-left: auto; margin-right: auto; overflow: hidden;">
+      <div class="button2" style="text-align: left;" onclick="toggle('workers_holder');">工人：&nbsp;
+        <input style="font-size: 14px; color: white;" class="input" id="workers" value="0" readonly="readonly" type="text"></div>
+      <div class="menu_holder" id="workers_holder" style="height: 160px; overflow: scroll; display: block;">
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="lumberjackCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">伐木工
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="lumberjacks" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyLumberjack()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/lumberjack-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">伐木工人有 45% 的机会得到 1 木材每 0.25 秒。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会 +1 木材</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="ironMinerCost" style="text-align: right; top: 50%;" class="input" value="4" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">铁矿工
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="ironMiners" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyIronMiner()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/iron-miner-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">铁矿工有 35% 的机会得到 1 铁每 0.25 秒
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +1 铁</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="copperMinerCost" style="text-align: right; top: 50%; " class="input" value="5" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">铜矿工
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="copperMiners" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyCopperMiner()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/copper-miner-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">铜矿工有 30% 的机会得到 1 铜每 0.25 秒
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +1 铜</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="goldMinerCost" style="text-align: right; top: 50%; " class="input" value="25" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">金矿工
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="goldMiners" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyGoldMiner()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/gold-miner-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">金矿工有 5% 的机会得到 1 金矿每 0.25 秒
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +1 金矿</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="jewelerCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">珠宝商
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="jewelers" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyJeweler()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/jeweler-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">珠宝商有 千分之一 的机会得到 1 钻石每 0.25 秒
+          <br>
+          <span style="font-size: 10px; color: green;"> 每次点击都有机会获得 +1 钻石</span></div>
+      </div>
+      <br>
+      <div class="button2" style="text-align: left;" onclick="toggle('tools_holder');">工具：&nbsp;
+        <input style="font-size: 14px; color: white;" class="input" id="tools" value="0" readonly="readonly" type="text"></div>
+      <div class="menu_holder" style="height: 160px; overflow: scroll; display: none;" id="tools_holder">
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodAxeCost" style="text-align: right; top: 50%; " class="input" value="10" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="木头" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironAxeCost" style="text-align: right; top: 50%; " class="input" value="50" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">斧头
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="axes" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyAxe()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/axe-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">斧头增加伐木工人的效率。 每个拥有斧头的伐木工人每 0.25 秒就有 45% 的机会得到 2 木头。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +1 木头</span>
+          <br>
+          <span style="font-size: 10px; color: red;">每把斧头需要一个伐木工人。</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodSteelPickaxeCost" style="text-align: right; top: 50%; " class="input" value="20" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironSteelPickaxeCost" style="text-align: right; top: 50%; " class="input" value="100" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">钢镐
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="steelPickaxes" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buySteelPickaxe()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/steel-pickaxe-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">钢镐增加铁矿工的效率。 每个拥有钢镐的铁矿工有 35% 的机会每 0.25 秒获得 2 个铁。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +1 铁</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need one Iron Miner per steel pickaxe.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodColdHammerCost" style="text-align: right; top: 50%; " class="input" value="50" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironColdHammerCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Cold Hammers
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="coldHammers" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyColdHammer()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/cold-hammer-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Cold Hammers increase the efficiency of Copper Miners. Each Copper Miner with a Cold Hammer has a 30/10 chance of getting 2 copper every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+1 Copper Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need one copper miner per cold hammer.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="copperGoldPanCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
+                  <br>
+                  <input id="ironGoldPanCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Gold Pans
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="goldPans" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyGoldPan()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/gold-pan-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Gold Pans increase the efficiency of Gold Miners. Each Gold Miner with a Gold Pan has a 5/100 chance of getting 2 gold every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+1 Gold Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need one Gold Miner per gold pan.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="diamondChiselCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
+                  <br>
+                  <input id="ironChiselCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Chisels
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="chisels" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyChisel()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/chisel-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Chisels increase the efficiency of Jewelers. Each Jeweler with a Chisel has a 1/1000 chance of getting 2 diamond every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+1 Diamond Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need one jeweler per chisel.</span></div>
+      </div>
+      <br>
+      <div class="button2" style="text-align: left;" onclick="toggle('buildings_holder');">建筑：&nbsp;
+        <input style="font-size: 14px; color: white;" class="input" id="buildings" value="0" readonly="readonly" type="text"></div>
+      <div class="menu_holder" id="buildings_holder" style="height: 175px; overflow: scroll; display: none;">
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodSawmillCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironSawmillCost" style="text-align: right; top: 50%; " class="input" value="10,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">锯木厂
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="sawmills" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buySawmill()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/sawmill-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">锯木厂每0.25秒就有45%的机会生产50木头。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击有机会 +50 机会</span>
+          <br>
+          <span style="font-size: 10px; color: red;">每个锯木厂至少需要一个伐木工人。</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodBeneCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironBeneCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">增益
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="benes" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyBene()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/bene-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Beneficiators have a 35/100 chance of producing 50 iron every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+50 Iron Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one iron miner per beneficiator.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodElectroCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="copperElectroCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
+                  <br>
+                  <input id="ironElectroCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Electro-refineries
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="electros" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyElectro()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/electro-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Electro-refineries have a 30/100 chance of producing 50 copper every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+50 Copper Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one copper miner per electro-refinery.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodSmelteryCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironSmelteryCost" style="text-align: right; top: 50%; " class="input" value="75,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Smelteries
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="smelteries" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buySmeltery()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/smeltery-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Smelteries have a 5/100 chance of producing 50 gold every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+50 Gold Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one gold miner per smeltery.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="diamondGemStationCost" style="text-align: right; top: 50%; " class="input" value="20" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
+                  <br>
+                  <input id="woodGemStationCost" style="text-align: right; top: 50%; " class="input" value="10,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <input id="ironGemStationCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Gem Stations
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="gemStations" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyGemStation()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/gem-station-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Gem Stations have a 1/1000 chance of producing 50 diamond every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+50 Diamond Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one jeweler per gem station.</span></div>
+      </div>
+      <br>
+      <div class="button2" style="text-align: left;" onclick="toggle('techs_holder');">技术：&nbsp;
+        <input style="font-size: 14px; color: white;" class="input" id="technologies" value="0" readonly="readonly" type="text"></div>
+      <div class="menu_holder" id="techs_holder" style="height: 175px; overflow: scroll; display: none;">
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="diamondSuperSawCost" style="text-align: right; top: 50%; " class="input" value="50" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
+                  <br>
+                  <input id="goldSuperSawCost" style="text-align: right; top: 50%; " class="input" value="1,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
+                  <br>
+                  <input id="ironSuperSawCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Super Saws
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="superSaws" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buySuperSaw()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/super-saw-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Super Saws have a 45/100 chance of getting 100 wood every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+100 Wood Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one lumberjack per super saw.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="goldOreReactorCost" style="text-align: right; top: 50%; " class="input" value="5,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
+                  <br>
+                  <input id="copperOreReactorCost" style="text-align: right; top: 50%; " class="input" value="100,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
+                  <br>
+                  <input id="ironOreReactorCost" style="text-align: right; top: 50%; " class="input" value="200,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Ore-Reactors
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="oreReactors" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyOreReactor()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/ore-reactor-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Ore-Reactors have a 35/100 chance of getting 100 iron every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+100 Iron Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one iron miner per ore-reactor.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="goldTeslaCost" style="text-align: right; top: 50%; " class="input" value="1,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
+                  <br>
+                  <input id="ironTeslaCost" style="text-align: right; top: 50%; " class="input" value="100,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
+                  <br>
+                  <input id="copperTeslaCost" style="text-align: right; top: 50%; " class="input" value="200,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Tesla Drills
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="teslas" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyTesla()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/tesla-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Tesla Drills have a 30/100 chance of getting 100 copper every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+100 Copper Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one copper miner per tesla drill.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="diamondGoldFishCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
+                  <br>
+                  <input id="goldGoldFishCost" style="text-align: right; top: 50%; " class="input" value="10,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Gold Fish
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="goldFish" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyGoldFish()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/gold-fish-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Gold Fish have a 5/100 chance of getting 100 gold every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+100 Gold Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one gold miner per gold fish.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="diamondMoleculeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="1,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
+                  <br>
+                  <input id="copperMoleculeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="500,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
+                  <br>
+                  <input id="ironMoleculeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="1,000,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Molecule Compressors
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="molecules" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyMolecule()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/molecule-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">Molecule Compressors have a 1/1000 chance of getting 100 diamond every 0.25 seconds.
+          <br>
+          <span style="font-size: 10px; color: green;">+100 Diamond Chance per Click</span>
+          <br>
+          <span style="font-size: 10px; color: red;">Need at least one jeweler per molecule compressor.</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="goldBridgeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="200,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
+                  <br>
+                  <input id="woodBridgeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="10,000,000" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Space Bridge
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="bridges" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input id="bridgeButton" class="button" onclick="buyBridge()" value="购买" type="button">
+                  <input id="iframeButton2" class="button" onclick="toggleVisit();" value="Visit Earth" type="button" style="display: none;"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/bridge-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">The Space Bridge allows you to visit Earth to gather resources yourself.
+          <br></div></div>
+      <br>
+      <div class="button4" style="text-align: center;" onclick="toggle('trade_holder');">交易</div>
+      <div class="menu_holder" id="trade_holder" style="height: 160px; overflow: scroll; display: none;">
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="tradeWoodCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
+                  <br>
+                  <img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
+                  <br>
+                  <input id="tradeWoodGoldCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">木头 = 金矿
+                  <br>
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="tradeWood()" value="Trade" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/lumberjack-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">用木材交易获得黄金。</div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="tradeIronCost" style="text-align: right; top: 50%; " class="input" value="100" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
+                  <br>
+                  <img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
+                  <br>
+                  <input id="tradeIronGoldCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Iron = Gold
+                  <br>
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="tradeIron()" value="Trade" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/iron-miner-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">用铁交易获得黄金</div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="tradeCopperCost" style="text-align: right; top: 50%; " class="input" value="80" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
+                  <br>
+                  <img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
+                  <br>
+                  <input id="tradeCopperGoldCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Copper = Gold
+                  <br>
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="tradeCopper()" value="Trade" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/copper-miner-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">用铜交易获得黄金</div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="tradeDiamondCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
+                  <br>
+                  <img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
+                  <br>
+                  <input id="tradeDiamondGoldCost" style="text-align: right; top: 50%; " class="input" value="25" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Diamond = Gold
+                  <br>
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="tradeDiamond()" value="Trade" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/jeweler-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">用钻石交易获得黄金</div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="tradeGoldCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Iron" src="images/gold-icon.png">
+                  <br>
+                  <img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
+                  <br>
+                  <input id="tradeGoldDiamondCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Gold" src="images/diamond-icon.png"></div>
+              </td>
+              <td style="width: 101px; vertical-align: middle;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">Gold = Diamond
+                  <br>
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="tradeGold()" value="Trade" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/gold-miner-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">用金矿交易获得钻石</div></div>
+    </div>
+    <div class="rounded" id="objectives_holder" style="overflow: scroll; top: 100px; background-color: white; width: 30%; height: 500px; position: absolute; text-align: center; left: 68%;">目标
+      <br>
+      <br>
+      <table class="objective" style="text-align: left;" id="objective1_style" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective1" style="width: 60px; height: 60px;" alt="objective1" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;老板
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买一名工人。</span>
+              <input id="objective1" class="input" value="0" type="hidden"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective2_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective2" style="width: 60px; height: 60px;" alt="objective2" src="images/tool-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;如何方便
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买一个工具。</span>
+              <input id="objective2" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective3_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective3" style="width: 60px; height: 60px;" alt="objective3" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Employer
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 5 workers.</span>
+              <input id="objective3" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective4_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective4" style="width: 60px; height: 60px;" alt="objective4" src="images/tool-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;在工具室
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买 5 个工具。</span>
+              <input id="objective4" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective5_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img style="width: 60px; height: 60px;" id="objective5" alt="objective5" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Crew
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 10 workers.</span>
+              <input id="objective5" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective6_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective6" style="width: 60px; height: 60px;" alt="objective6" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;伐木工单位!
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买 10 伐木工。</span>
+              <input id="objective6" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective7_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective7" style="width: 60px; height: 60px;" alt="objective7" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;The Iron Board
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 10 Iron Miners.</span>
+              <input id="objective7" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective8_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective8" style="width: 60px; height: 60px;" alt="objective8" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Copper Hopper
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 10 Copper Miners.</span>
+              <input id="objective8" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="objective" id="objective9_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective9" style="width: 60px; height: 60px;" alt="objective9" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;The Golderers
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 10 Gold Miners.</span>
+              <input id="objective9" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective10_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective10" style="width: 60px; height: 60px;" alt="objective10" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Diamond Time
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase one Jeweler.</span>
+              <input id="objective10" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective11_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective11" style="width: 60px; height: 60px;" alt="objective11" src="images/building-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Entrepreneur
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase one Building.</span>
+              <input id="objective11" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective12_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective12" style="width: 60px; height: 60px;" alt="objective12" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;No. Way.
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Get one diamond.</span>
+              <input id="objective12" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective13_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective13" style="width: 60px; height: 60px;" alt="objective13" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Company
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 50 Workers.</span>
+              <input id="objective13" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective14_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective14" style="width: 60px; height: 60px;" alt="objective14" src="images/tool-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Nuts and Bolts
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 50 Tools.</span>
+              <input id="objective14" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective15_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective15" style="width: 60px; height: 60px;" alt="objective15" src="images/building-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Franchise
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 5 Buildings.</span>
+              <input id="objective15" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective16_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective16" style="width: 60px; height: 60px;" alt="objective16" src="images/technology-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;The Machines!
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase one Technology.</span>
+              <input id="objective16" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective17_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective17" style="width: 60px; height: 60px;" alt="objective17" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Super Saver
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Have 1000 Gold at one time.</span>
+              <input id="objective17" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective18_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective18" style="width: 60px; height: 60px;" alt="objective18" src="images/worker-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;Conglomerate
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 100 Workers.</span>
+              <input id="objective18" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective19_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective19" style="width: 60px; height: 60px;" alt="objective19" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;International
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 50 of everything.</span>
+              <input id="objective19" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective20_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective20" style="width: 60px; height: 60px;" alt="objective20" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;World Domination
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; Purchase 100 of everything.</span>
+              <input id="objective20" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective21_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective21" style="width: 60px; height: 60px;" alt="objective21" src="images/technology-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;脚踏实地
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买太空桥。</span>
+              <input id="objective21" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective23_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective23" style="width: 60px; height: 60px;" alt="objective23" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;超级能力
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 每个特殊能力都购买了 1 次。</span>
+              <input id="objective23" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective24_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective24" style="width: 60px; height: 60px;" alt="objective24" src="images/technology-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;科技战士
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买200种技术。</span>
+              <input id="objective24" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective25_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective25" style="width: 60px; height: 60px;" alt="objective25" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;双重麻烦
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 购买20次特殊能力。</span>
+              <input id="objective25" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="objective26_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1">
+              <img id="objective26" style="width: 60px; height: 60px;" alt="objective26" src="images/ore-objective-icon.png"></td>
+            <td style="vertical-align: middle;">&nbsp;这么久了，地球！
+              <br>
+              <span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp; 收集所有资源。</span>
+              <input id="objective26" class="input" value="0" type="hidden"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rounded" style="top: 10px; background-color: white; width: 30%; position: absolute; text-align: center; left: 68%;">
+      <div class="button2" style="text-align: left;" onclick="toggle('powerups_holder');">特殊能力：&nbsp;
+        <input style="font-size: 14px; color: white;" class="input" id="powerups" value="0" readonly="readonly" type="text"></div>
+      <div class="menu_holder" id="powerups_holder" style="height: 210px; overflow: scroll; display: none;">
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="woodPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Benitoite" src="images/benitoite-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">+5% 木头
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="woodPowerups" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyWoodPowerup()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/wood-powerup-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">木头能力使木头的产量增加了 5％ 。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +5% 木头</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="ironPowerupCost" style="text-align: right; top: 50%;" class="input" value="1" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Black Opal" src="images/black-opal-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">+5% 铁
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="ironPowerups" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyIronPowerup()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/iron-powerup-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">铁矿能力使铁的产量增加了 5％ 。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +5% 铁</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="copperPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="emerald" src="images/emerald-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">+5% 铜
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="copperPowerups" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyCopperPowerup()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/copper-powerup-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">铜矿能力使铜的产量增加了 5％ 。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +5% 铜</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="goldPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Painite" src="images/painite-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">+5% 金矿
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="goldPowerups" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyGoldPowerup()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/gold-powerup-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">金矿能力使金矿的产量增加了 5％ 。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +5% 金矿</span></div>
+        <br>
+        <table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
+          <tbody>
+            <tr>
+              <td>
+                <div style="text-align: right;">
+                  <br></div>
+                <div style="text-align: right;">
+                  <input id="diamondPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text">
+                  <img style="width: 40px; height: 40px;" alt="Red Diamond" src="images/red-diamond-icon.png"></div>
+              </td>
+              <td style="width: 101px;">
+                <div style="text-align: left;"></div>
+                <div style="text-align: center; color: rgb(100, 100, 100);">+5% 钻石
+                  <br></div>
+                <div style="text-align: center;">
+                  <input style="text-align: center;" id="diamondPowerups" class="input" value="0" readonly="readonly" type="text">
+                  <br></div>
+                <div style="text-align: center;">
+                  <input class="button" onclick="buyDiamondPowerup()" value="购买" type="button"></div>
+              </td>
+              <td style="vertical-align: middle; width: 60px;">
+                <img style="width: 60px; height: 60px;" alt="" src="images/diamond-powerup-icon.png"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hidden">钻石能力使钻石的产量增加了 5％ 。
+          <br>
+          <span style="font-size: 10px; color: green;">每次点击都有机会获得 +5% 钻石</span></div>
+      </div>
+    </div>
+    <div id="game_save" class="game_save" style="top: 90%;">游戏已保存</div>
+    <div id="alert" class="game_save" style="top: 100px;"></div>
+    <div id="game_save" onclick="toggle('menu_holder');" class="button3">菜单</div>
+    <div id="menu_holder" style="padding: 20px; font-size: 12px; position: fixed; left: 0px; top: 35px; width: 160px; background-color: white; display: none; z-index: 10;">
+      <a style="font-size: 10px; color: silver;">资源游戏 版本号：1.6.1</a>
+      <br>
+      <br>
+      <a href="index.html#" onclick="saveGame();">保存游戏</a>
+      <br>
+      <br>
+      <input type="checkbox" name="graphics" id="graphics" value="graphics" onclick="fancyGraphics();">花哨的图形
+      <br>
+      <br>
+      <input type="checkbox" name="effects" id="effects" value="effects" onclick="textEffects();">文字效果
+      <br>
+      <br>
+      <hr>
+      <a href="index.html#" onclick="deleteGame()">删除游戏进度（需要重新启动浏览器）</a></div>
+    <div class="button3" id="iframeButton" onclick="toggleVisit();" style="left: 125px; width: 150px; index: 50; display: none;">Visit Earth</div>
+    <div id="iframe" class="iframe" style="display: none;">
+      <iframe style="width: 800px; height: 320px;" src="earth.html" scrolling="no"></iframe>
+    </div>
+    <img id="firstClick" style="position: absolute; top: 0px; left: 20%; z-index: 20;" src="images/click-earth.png">
+    <!-- <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FTheResourceGame&send=false&layout=box_count&width=100&show_faces=false&share=true&action=like&colorscheme=light&font=verdana&height=100" style="border: medium none ; overflow: hidden; width: 52px; height: 100px; position: fixed; left: 0px; top: 35px; z-index: 6;" allowtransparency="true" frameborder="0" scrolling="no"></iframe> -->
+    <div class="advert" style="display: block;">
+      <div style="position: absolute; top: 0px;">
+        <!-- Ad Here -->
+        <!-- <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+        <!-- Resource Banner -->
+        <!-- <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7676680301261177" data-ad-slot="4645135925"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script> -->
+      </div>
+    </div>
+    <div style="text-align: center; font-size: 12px; position: absolute; top: 700px; color: white;display:none;">©2013 Shmoggo.com -
+      <a target="_blank" href="terms.html">Terms and Conditions</a></div>
+  </body>
 
-.iframe
-{
-width: 800px;
-height: 320px;
-position: fixed;
-background color: white;
-left: 50%;
-margin-left: -400px;
-top: 50px;
-z-index: 50;
-box-shadow: 0px 0px 5px #222222;
-border: 2px solid silver;
-}
-.advert
-{
-width: 728px;
-height: 90px;
-position: absolute;
-left: 50%;
-margin-left: -364px;
-top: 630px;
-z-index: 5001;
-box-shadow: 0px 0px 5px #222222;
-text-align: right;
-}
-.opacity
-{
-opacity:1.0;
-filter:alpha(opacity=100);
-color: black;
-}
-.clear
-{
-opacity:1.0;
-filter:alpha(opacity=100);
-color: black;
-}
-.gemHover:hover + div {
-display: block;
-}
-
-
-</style>
-<script type="text/javascript">
-//
-//Hide and Show Toggler
-//
-function toggle(id) {
-var e = document.getElementById(id);
-if(e.style.display == 'block'){
-e.style.display = 'none';
-}
-else
-{
-e.style.display = 'block';
-}
-if(id == "powerups_holder")
-{
-if(e.style.display == 'block'){
-document.getElementById('objectives_holder').style.height = '285px';
-document.getElementById('objectives_holder').style.top = '315px';
-}
-else
-{
-document.getElementById('objectives_holder').style.height = '500px';
-document.getElementById('objectives_holder').style.top = '100px';
-}
-}
-}
-//
-//Hide and Show Visit Earth
-//
-function toggleVisit() {
-var e = document.getElementById('iframe');
-if(e.style.display == 'block'){
-e.style.display = 'none';
-document.getElementById("iframeButton").innerHTML = "Visit Earth";
-}
-else
-{
-e.style.display = 'block';
-document.getElementById("iframeButton").innerHTML = "Leave Earth";
-}
-}
-//
-//Commas
-//
-function numberWithCommas(x) {
-return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-//
-//Delete Game
-//
-function deleteGame()
-{
-var r=confirm("You are about to delete all progress. Do you want to continue?");
-if (r==true)
-{
-localStorage.clear(); 
-window.close();
-}
-}
-//
-//On Load, Run Game
-//
-function gameRun()
-{
-//
-//Save Game Every 1 Minute
-//
-setInterval(function (){saveGame()},60000);
-//
-setInterval(function (){objective1()},1000);
-setInterval(function (){objective2()},1000);
-setInterval(function (){objective3()},1000);
-setInterval(function (){objective4()},1000);
-setInterval(function (){objective5()},1000);
-setInterval(function (){objective6()},1000);
-setInterval(function (){objective7()},1000);
-setInterval(function (){objective8()},1000);
-setInterval(function (){objective9()},1000);
-setInterval(function (){objective10()},1000);
-setInterval(function (){objective11()},1000);
-setInterval(function (){objective12()},1000);
-setInterval(function (){objective13()},1000);
-setInterval(function (){objective14()},1000);
-setInterval(function (){objective15()},1000);
-setInterval(function (){objective16()},1000);
-setInterval(function (){objective17()},1000);
-setInterval(function (){objective18()},1000);
-setInterval(function (){objective19()},1000);
-setInterval(function (){objective20()},1000);
-setInterval(function (){objective21()},1000);
-setInterval(function (){objective23()},1000);
-setInterval(function (){objective24()},1000);
-setInterval(function (){objective25()},1000);
-//
-
-//
-setInterval(function (){clickWood()},250);
-setInterval(function (){clickIron()},250);
-setInterval(function (){clickCopper()},250);
-setInterval(function (){clickGold()},250);
-setInterval(function (){clickDiamond()},250);
-}
-
-//
-//Fancy Graphics
-//
-function fancyGraphics()
-{
-if (document.getElementById("graphics").checked == true)
-{
-document.getElementById('earthGraphics').innerHTML = '<div class="stage"><figure class="ball" onclick="clickEarth();"></figure></div><div class="rotate2"></div>';
-}
-if (document.getElementById("graphics").checked == false)
-{
-document.getElementById('earthGraphics').innerHTML = '<img class="earth" style="position: relative; z-index: 5;" alt="EARTH" src="images/earth.png" onclick="clickEarth();">';
-}
-}
-</script>
-</head>
-<body style="color: rgb(0, 0, 0); background-color: rgb(35, 35, 35);" onload="gameRun(); gameLoad();" alink="#000099" link="#000099" vlink="#990099">
-<div
- style="width: 30%; height: 600px; text-align: center; margin-right: auto;">
-<div id="earthGraphics"
- style="text-align: center; width: 310px; height: 310px; position: relative; margin-left: auto; margin-right: auto; top: 25px;">
-<div class="stage"><figure class="ball"
- onclick="clickEarth();"></figure></div>
-<div class="rotate2"></div>
-</div>
-
-<div class="rounded" style="padding-top: 0px; position: relative; top: 30px; width: 250px; height: 285px; background-color: white; margin-left: auto; margin-right: auto; text-align: right;">
-<br>
-<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="text-align: center;"><img style="width: 40px; height: 40px;" alt="" src="images/wood-icon.png">
-</td>
-<td style="vertical-align: middle;"><span style="color: rgb(100, 100, 100);">Wood</span><span id="woodAdd"></span><br>
-<input class="input" id="wood" value="0" readonly="readonly" type="text"></td>
-</tr>
-<tr>
-<td style="text-align: center;"><img style="width: 40px; height: 40px;" alt="" src="images/iron-icon.png">
-</td>
-<td style="vertical-align: middle;"><span style="color: rgb(100, 100, 100);">Iron</span><span id="ironAdd"></span><br>
-<input class="input" id="iron" value="0" readonly="readonly" type="text"></td>
-</tr>
-<tr>
-<td style="text-align: center;"><img style="width: 40px; height: 40px;" alt="" src="images/copper-icon.png">
-</td>
-<td style="vertical-align: middle;"><span style="color: rgb(100, 100, 100);">
-Copper</span><span id="copperAdd"></span><br>
-<input class="input" id="copper" value="0" readonly="readonly" type="text"></td>
-</tr>
-<tr>
-<td style="text-align: center;"><img style="width: 40px; height: 40px; vertical-align: middle;" alt="" src="images/gold-icon.png">
-</td>
-<td style="vertical-align: middle;"><span style="color: rgb(100, 100, 100);">
-Gold</span><span id="goldAdd"></span><br>
-<input class="input" id="gold" value="0" readonly="readonly" type="text"></td>
-</tr>
-<tr>
-<td style="text-align: center;"><img style="width: 40px; height: 40px;" alt="" src="images/diamond-icon.png">
-</td>
-<td style="vertical-align: middle;"><span style="color: rgb(100, 100, 100);">
-Diamond</span><span id="diamondAdd"></span><br>
-<input class="input" id="diamond" value="0" readonly="readonly" type="text"></td>
-</tr>
-</tbody>
-</table>
-<hr>
-
-<table style="text-align: center; width: 250px;" border="0" cellpadding="0" cellspacing="0">
-  <tbody>
-    <tr>
-      <td class="opacity" id="benitoiteTd"><img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/benitoite-icon.png"><div class="hidden">rare gem: benitoite<br>
-<span style="font-size: 10px; color: red;">Can only be found by visiting earth.</span></div><br><input style="width: 40px; position: relative; top: -13px;" class="input" id="benitoite" value="0" readonly="readonly" type="text"></td>
-
-      
-      <td class="opacity" id="blackOpalTd"><img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/black-opal-icon.png"><div class="hidden">rare gem: black opal<br>
-<span style="font-size: 10px; color: red;">Can only be found by visiting earth.</span></div><br><input style="width: 40px; position: relative; top: -13px;" class="input" id="blackOpal" value="0" readonly="readonly" type="text"></td>
-      
-      <td class="opacity" id="emeraldTd"><img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/emerald-icon.png"><div class="hidden">rare gem: emerald<br>
-<span style="font-size: 10px; color: red;">Can only be found by visiting earth.</span></div><br><input style="width: 40px; position: relative; top: -13px;" class="input" id="emerald" value="0" readonly="readonly" type="text"></td>
-      
-      <td class="opacity" id="painiteTd"><img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/painite-icon.png"><div class="hidden">rare gem: painite<br>
-<span style="font-size: 10px; color: red;">Can only be found by visiting earth.</span></div><br><input style="width: 40px; position: relative; top: -13px;" class="input" id="painite" value="0" readonly="readonly" type="text"></td>
-     
-      <td class="opacity" id="redDiamondTd"><img class="gemHover" style="width: 40px; height: 40px;" alt="" src="images/red-diamond-icon.png"><div class="hidden">rare gem: red diamond<br>
-<span style="font-size: 10px; color: red;">Can only be found by visiting earth.</span></div><br><input style="width: 40px; position: relative; top: -13px;" class="input" id="redDiamond" value="0" readonly="readonly" type="text"></td>
-     
-    </tr>
-  </tbody>
-</table>
-
-</div>
-</div>
-<div class="rounded" style="padding: 10px; top: -590px; background-color: white; width: 30%; position: relative; text-align: right; margin-left: auto; margin-right: auto; overflow: hidden;">
-<div class="button2" style="text-align: left;" onclick="toggle('workers_holder');">Workers:&nbsp;<input style="font-size: 14px; color: white;" class="input" id="workers" value="0" readonly="readonly" type="text">
-</div>
-<div class="menu_holder" id="workers_holder" style="height: 160px; overflow: scroll; display: block;">
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="lumberjackCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Lumberjacks<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="lumberjacks" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyLumberjack()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/lumberjack-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Lumberjacks have a 45/100 chance of
-getting 1 wood every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Wood
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="ironMinerCost" style="text-align: right; top: 50%;" class="input" value="4" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Iron
-Miners<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="ironMiners" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyIronMiner()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/iron-miner-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Iron Miners have a 35/100 chance of
-getting 1 iron every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Iron
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="copperMinerCost" style="text-align: right; top: 50%; " class="input" value="5" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Copper
-Miners<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="copperMiners" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyCopperMiner()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/copper-miner-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Copper Miners have a 30/100 chance of
-getting 1 copper every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Copper
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="goldMinerCost" style="text-align: right; top: 50%; " class="input" value="25" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Gold
-Miners<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="goldMiners" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyGoldMiner()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/gold-miner-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Gold Miners have a 5/100 chance of
-getting 1 gold every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Gold
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="jewelerCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Jewelers<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="jewelers" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyJeweler()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/jeweler-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Jewelers have a 1/1000 chance of
-getting 1 diamond every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Diamond
-Chance per Click</span></div>
-</div>
-<br>
-<div class="button2" style="text-align: left;" onclick="toggle('tools_holder');">Tools:&nbsp;<input style="font-size: 14px; color: white;" class="input" id="tools" value="0" readonly="readonly" type="text">
-</div>
-<div class="menu_holder" style="height: 160px; overflow: scroll; display: none;" id="tools_holder">
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodAxeCost" style="text-align: right; top: 50%; " class="input" value="10" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
-<br>
-<input id="ironAxeCost" style="text-align: right; top: 50%; " class="input" value="50" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Axes<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="axes" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyAxe()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/axe-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Axes increase the efficiency of
-Lumberjacks. Each Lumberjack with an Axe has a 45/100 chance of getting
-2 wood every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Wood
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need one lumberjack per axe.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodSteelPickaxeCost" style="text-align: right; top: 50%; " class="input" value="20" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"><br>
-<input id="ironSteelPickaxeCost" style="text-align: right; top: 50%; " class="input" value="100" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Steel
-Pickaxes<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="steelPickaxes" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buySteelPickaxe()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/steel-pickaxe-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Steel Pickaxes increase the efficiency
-of
-Iron Miners. Each Iron Miner with a Steel Pickaxe has a 35/100 chance
-of
-getting
-2 iron every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Iron
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need one Iron Miner per steel pickaxe.</span>
-</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodColdHammerCost" style="text-align: right; top: 50%; " class="input" value="50" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"><br>
-<input id="ironColdHammerCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Cold
-Hammers<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="coldHammers" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyColdHammer()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/cold-hammer-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Cold Hammers increase the efficiency
-of
-Copper Miners. Each Copper Miner with a Cold Hammer has a 30/10 chance
-of getting 2 copper every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Copper
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need one copper miner per cold hammer.</span>
-</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="copperGoldPanCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png"><br>
-<input id="ironGoldPanCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Gold
-Pans<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="goldPans" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyGoldPan()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/gold-pan-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Gold Pans increase the efficiency of
-Gold Miners. Each Gold Miner with a Gold Pan has a 5/100 chance of
-getting 2 gold every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Gold
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need one Gold Miner per gold pan.</span>
-</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="diamondChiselCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png"><br>
-<input id="ironChiselCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Chisels<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="chisels" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyChisel()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/chisel-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Chisels increase the efficiency of
-Jewelers. Each Jeweler with a Chisel has a 1/1000 chance of getting
-2 diamond every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+1 Diamond
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need one jeweler per chisel.</span>
-</div>
-</div>
-<br>
-<div class="button2" style="text-align: left;" onclick="toggle('buildings_holder');">Buildings:&nbsp;<input style="font-size: 14px; color: white;" class="input" id="buildings" value="0" readonly="readonly" type="text">
-</div>
-<div class="menu_holder" id="buildings_holder" style="height: 175px; overflow: scroll; display: none;">
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodSawmillCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
-<br>
-<input id="ironSawmillCost" style="text-align: right; top: 50%; " class="input" value="10,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Sawmills<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="sawmills" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buySawmill()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/sawmill-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Sawmills have a 45/100 chance of
-producing 50 wood every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+50 Wood
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one lumberjack per sawmill.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodBeneCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"><br>
-<input id="ironBeneCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Beneficiators<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="benes" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyBene()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/bene-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Beneficiators have a 35/100 chance of
-producing 50 iron every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+50 Iron
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one iron miner per beneficiator.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodElectroCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"><br>
-<input id="copperElectroCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png"><br>
-<input id="ironElectroCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"></div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Electro-refineries<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="electros" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyElectro()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/electro-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Electro-refineries have a 30/100
-chance
-of producing 50 copper every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+50 Copper
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one copper miner per electro-refinery.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodSmelteryCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"><br>
-<input id="ironSmelteryCost" style="text-align: right; top: 50%; " class="input" value="75,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Smelteries<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="smelteries" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buySmeltery()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/smeltery-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Smelteries have a 5/100 chance of
-producing 50 gold every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+50 Gold
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one gold miner per smeltery.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="diamondGemStationCost" style="text-align: right; top: 50%; " class="input" value="20" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png"><br>
-<input id="woodGemStationCost" style="text-align: right; top: 50%; " class="input" value="10,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png"><br>
-<input id="ironGemStationCost" style="text-align: right; top: 50%; " class="input" value="20,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Gem
-Stations<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="gemStations" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyGemStation()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/gem-station-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Gem Stations have a 1/1000 chance of
-producing 50 diamond every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+50 Diamond
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one jeweler per gem station.</span></div>
-</div>
-<br>
-<div class="button2" style="text-align: left;" onclick="toggle('techs_holder');">Technologies:&nbsp;<input style="font-size: 14px; color: white;" class="input" id="technologies" value="0" readonly="readonly" type="text">
-</div>
-<div class="menu_holder" id="techs_holder" style="height: 175px; overflow: scroll; display: none;">
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;">
-<input id="diamondSuperSawCost" style="text-align: right; top: 50%; " class="input" value="50" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png"><br>
-<input id="goldSuperSawCost" style="text-align: right; top: 50%; " class="input" value="1,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"><br>
-<input id="ironSuperSawCost" style="text-align: right; top: 50%; " class="input" value="50,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Super
-Saws<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="superSaws" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buySuperSaw()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/super-saw-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Super Saws have a 45/100 chance of
-getting 100 wood every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+100 Wood
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one lumberjack per super saw.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="goldOreReactorCost" style="text-align: right; top: 50%; " class="input" value="5,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"><br>
-<input id="copperOreReactorCost" style="text-align: right; top: 50%; " class="input" value="100,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
-<br>
-<input id="ironOreReactorCost" style="text-align: right; top: 50%; " class="input" value="200,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Ore-Reactors<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="oreReactors" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyOreReactor()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/ore-reactor-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Ore-Reactors have a 35/100 chance of
-getting 100 iron every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+100 Iron
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one iron miner per ore-reactor.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="goldTeslaCost" style="text-align: right; top: 50%; " class="input" value="1,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"><br>
-<input id="ironTeslaCost" style="text-align: right; top: 50%; " class="input" value="100,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png"><br>
-<input id="copperTeslaCost" style="text-align: right; top: 50%; " class="input" value="200,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png"></div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Tesla
-Drills<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="teslas" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyTesla()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/tesla-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Tesla Drills have a 30/100 chance of
-getting 100 copper every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+100 Copper
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one copper miner per tesla drill.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;">
-<input id="diamondGoldFishCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png"><br>
-<input id="goldGoldFishCost" style="text-align: right; top: 50%; " class="input" value="10,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Gold
-Fish<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="goldFish" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyGoldFish()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/gold-fish-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Gold Fish have a 5/100 chance of
-getting 100 gold every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+100 Gold
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one gold miner per gold fish.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="diamondMoleculeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="1,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png"><br>
-<input id="copperMoleculeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="500,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png"><br>
-<input id="ironMoleculeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="1,000,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Molecule
-Compressors<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="molecules" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyMolecule()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/molecule-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Molecule Compressors have a 1/1000
-chance of getting 100 diamond every 0.25 seconds.<br>
-<span style="font-size: 10px; color: green;">+100 Diamond
-Chance per Click</span><br><span style="font-size: 10px; color: red;">Need at least one jeweler per molecule compressor.</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;">
-<input id="goldBridgeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="200,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png"><br>
-<input id="woodBridgeCost" style="text-align: right; top: 50%;  width: 175px;" class="input" value="10,000,000" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Space Bridge<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="bridges" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input id="bridgeButton" class="button" onclick="buyBridge()" value="Purchase" type="button">
-<input id="iframeButton2" class="button" onclick="toggleVisit();" value="Visit Earth" type="button" style="display: none;"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/bridge-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">The Space Bridge allows you to visit Earth to gather resources yourself.<br>
-</div>
-</div>
-<br>
-<div class="button4" style="text-align: left;" onclick="toggle('trade_holder');">Trade
-</div>
-<div class="menu_holder" id="trade_holder" style="height: 160px; overflow: scroll; display: none;">
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="tradeWoodCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Wood" src="images/wood-icon.png">
-<br>
-<img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
-<br>
-<input id="tradeWoodGoldCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Wood
-= Gold<br>
-<br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="tradeWood()" value="Trade" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/lumberjack-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Trade wood for gold.</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="tradeIronCost" style="text-align: right; top: 50%; " class="input" value="100" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/iron-icon.png">
-<br>
-<img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
-<br>
-<input id="tradeIronGoldCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Iron
-= Gold<br>
-<br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="tradeIron()" value="Trade" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/iron-miner-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Trade iron for gold.</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="tradeCopperCost" style="text-align: right; top: 50%; " class="input" value="80" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Copper" src="images/copper-icon.png">
-<br>
-<img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
-<br>
-<input id="tradeCopperGoldCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Copper
-= Gold<br>
-<br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="tradeCopper()" value="Trade" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/copper-miner-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Trade copper for gold.</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="tradeDiamondCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Diamond" src="images/diamond-icon.png">
-<br>
-<img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
-<br>
-<input id="tradeDiamondGoldCost" style="text-align: right; top: 50%; " class="input" value="25" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/gold-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Diamond
-= Gold<br>
-<br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="tradeDiamond()" value="Trade" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/jeweler-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Trade diamond for gold.</div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="tradeGoldCost" style="text-align: right; top: 50%; " class="input" value="500" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Iron" src="images/gold-icon.png">
-<br>
-<img style="width: 30px; height: 20px;" alt="equals" src="images/down-arrow.png">
-<br>
-<input id="tradeGoldDiamondCost" style="text-align: right; top: 50%; " class="input" value="3" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Gold" src="images/diamond-icon.png">
-</div>
-</td>
-<td style="width: 101px; vertical-align: middle;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">Gold
-= Diamond<br>
-<br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="tradeGold()" value="Trade" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/gold-miner-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Trade gold for diamond.</div>
-</div>
-</div>
-
-<div class="rounded" id="objectives_holder" style="overflow: scroll; top: 100px; background-color: white; width: 30%; height: 500px; position: absolute; text-align: center; left: 68%;">
-Objectives
-<br>
-<br>
-<table class="objective" style="text-align: left;" id="objective1_style" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective1" style="width: 60px; height: 60px;" alt="objective1" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;The
-Boss<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase
-one worker.</span>
-<input id="objective1" class="input" value="0" type="hidden"></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective2_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective2" style="width: 60px; height: 60px;" alt="objective2" src="images/tool-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;How
-Handy<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase
-one tool.</span>
-<input id="objective2" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective3_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective3" style="width: 60px; height: 60px;" alt="objective3" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Employer<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 5 workers.</span>
-<input id="objective3" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective4_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective4" style="width: 60px; height: 60px;" alt="objective4" src="images/tool-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;In the
-Toolshed<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase
-5 tools.</span><input id="objective4" class="input" value="0" type="hidden">
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective5_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img style="width: 60px; height: 60px;" id="objective5" alt="objective5" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Crew<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase
-10 workers.</span><input id="objective5" class="input" value="0" type="hidden">
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective6_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective6" style="width: 60px; height: 60px;" alt="objective6" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Lumberjacks
-Unite!<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 10 Lumberjacks.</span><input id="objective6" class="input" value="0" type="hidden">
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective7_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective7" style="width: 60px; height: 60px;" alt="objective7" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;The
-Iron Board<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 10 Iron Miners.</span><input id="objective7" class="input" value="0" type="hidden">
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective8_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective8" style="width: 60px; height: 60px;" alt="objective8" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Copper
-Hopper<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 10 Copper Miners.</span><input id="objective8" class="input" value="0" type="hidden">
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="objective" id="objective9_style" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective9" style="width: 60px; height: 60px;" alt="objective9" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;The
-Golderers<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 10 Gold Miners.</span><input id="objective9" class="input" value="0" type="hidden">
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective10_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective10" style="width: 60px; height: 60px;" alt="objective10" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Diamond
-Time<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase
-one Jeweler.
-</span><input id="objective10" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective11_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective11" style="width: 60px; height: 60px;" alt="objective11" src="images/building-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Entrepreneur<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase
-one Building.
-</span><input id="objective11" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective12_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective12" style="width: 60px; height: 60px;" alt="objective12" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;No.
-Way.<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Get
-one diamond.
-</span><input id="objective12" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective13_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective13" style="width: 60px; height: 60px;" alt="objective13" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Company<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 50 Workers.
-</span><input id="objective13" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective14_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective14" style="width: 60px; height: 60px;" alt="objective14" src="images/tool-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Nuts
-and Bolts<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 50 Tools.
-</span><input id="objective14" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective15_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective15" style="width: 60px; height: 60px;" alt="objective15" src="images/building-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Franchise<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 5 Buildings.
-</span><input id="objective15" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective16_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective16" style="width: 60px; height: 60px;" alt="objective16" src="images/technology-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;The
-Machines!<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase one Technology.
-</span><input id="objective16" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective17_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective17" style="width: 60px; height: 60px;" alt="objective17" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Super
-Saver<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Have 1000 Gold at one time.
-</span><input id="objective17" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective18_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective18" style="width: 60px; height: 60px;" alt="objective18" src="images/worker-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Conglomerate<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 100 Workers.
-</span><input id="objective18" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective19_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective19" style="width: 60px; height: 60px;" alt="objective19" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;International<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 50 of everything.
-</span><input id="objective19" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective20_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective20" style="width: 60px; height: 60px;" alt="objective20" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;World
-Domination<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 100 of everything.
-</span><input id="objective20" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective21_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective21" style="width: 60px; height: 60px;" alt="objective21" src="images/technology-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Down to Earth<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase the Space Bridge.
-</span><input id="objective21" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective23_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective23" style="width: 60px; height: 60px;" alt="objective23" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Superrr Powerrrss!<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase one of each power-up.
-</span><input id="objective23" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective24_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective24" style="width: 60px; height: 60px;" alt="objective24" src="images/technology-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Tech Warrior<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 200 technologies.
-</span><input id="objective24" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective25_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective25" style="width: 60px; height: 60px;" alt="objective25" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;Double Trouble<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Purchase 20 Power-ups.
-</span><input id="objective25" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<br>
-<table id="objective26_style" class="objective" style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: middle; width: 60px;" colspan="1" rowspan="1"><img id="objective26" style="width: 60px; height: 60px;" alt="objective26" src="images/ore-objective-icon.png"></td>
-<td style="vertical-align: middle;">&nbsp;So Long, Earth!<br>
-<span style="font-size: 12px; color: rgb(100, 100, 100);">&nbsp;
-Gather all resources.
-</span><input id="objective26" class="input" value="0" type="hidden"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="rounded" style="top: 10px; background-color: white; width: 30%; position: absolute; text-align: center; left: 68%;">
-<div class="button2" style="text-align: left;" onclick="toggle('powerups_holder');">Power-Ups:&nbsp;<input style="font-size: 14px; color: white;" class="input" id="powerups" value="0" readonly="readonly" type="text">
-</div>
-<div class="menu_holder" id="powerups_holder" style="height: 210px; overflow: scroll; display: none;">
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="woodPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Benitoite" src="images/benitoite-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">+5% Wood<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="woodPowerups" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyWoodPowerup()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/wood-powerup-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Wood power-ups increase the production of wood by 5%.<br>
-<span style="font-size: 10px; color: green;">+5% Wood
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="ironPowerupCost" style="text-align: right; top: 50%;" class="input" value="1" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Black Opal" src="images/black-opal-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">+5% Iron
-<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="ironPowerups" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyIronPowerup()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/iron-powerup-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Iron power-ups increase the production of iron by 5%.<br>
-<span style="font-size: 10px; color: green;">+5% Iron
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="copperPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="emerald" src="images/emerald-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">+5% Copper
-<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="copperPowerups" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyCopperPowerup()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/copper-powerup-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Copper power-ups increase the production of copper by 5%.<br>
-<span style="font-size: 10px; color: green;">+5% Copper
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="goldPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Painite" src="images/painite-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">+5% Gold
-<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="goldPowerups" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyGoldPowerup()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/gold-powerup-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Gold power-ups increase the production of gold by 5%.<br>
-<span style="font-size: 10px; color: green;">+5% Gold
-Chance per Click</span></div>
-<br>
-<table class="menu" style="text-align: right; width: 100%; background-color: rgb(240, 240, 240);" border="2" cellpadding="4" cellspacing="4">
-<tbody>
-<tr>
-<td>
-<div style="text-align: right;"><br>
-</div>
-<div style="text-align: right;"><input id="diamondPowerupCost" style="text-align: right; top: 50%; " class="input" value="1" readonly="readonly" align="right" type="text"><img style="width: 40px; height: 40px;" alt="Red Diamond" src="images/red-diamond-icon.png">
-</div>
-</td>
-<td style="width: 101px;">
-<div style="text-align: left;"></div>
-<div style="text-align: center; color: rgb(100, 100, 100);">+5% Diamond<br>
-</div>
-<div style="text-align: center;"><input style="text-align: center;" id="diamondPowerups" class="input" value="0" readonly="readonly" type="text"><br>
-</div>
-<div style="text-align: center;"><input class="button" onclick="buyDiamondPowerup()" value="Purchase" type="button"></div>
-</td>
-<td style="vertical-align: middle; width: 60px;">
-<img style="width: 60px; height: 60px;" alt="" src="images/diamond-powerup-icon.png"></td>
-</tr>
-</tbody>
-</table>
-<div class="hidden">Diamond power-ups increase the production of diamond by 5%.<br>
-<span style="font-size: 10px; color: green;">+5% Diamond
-Chance per Click</span></div>
-</div>
-</div>
-<div id="game_save" class="game_save" style="top: 90%;">Game Saved</div>
-<div id="alert" class="game_save" style="top: 100px;"></div>
-<div id="game_save" onclick="toggle('menu_holder');" class="button3">Menu</div>
-<div id="menu_holder" style="padding: 20px; font-size: 12px; position: fixed; left: 0px; top: 35px; width: 160px; background-color: white; display: none; z-index: 10;">
-<a style="font-size: 10px; color: silver;">The Resource
-Game v1.6.1</a>
-<br>
-<br>
-<a href="index.html#" onclick="saveGame();">Save Game</a>
-<br>
-<br>
-<input type="checkbox" name="graphics" id="graphics" value="graphics" onclick="fancyGraphics();">Fancy Graphics
-<br>
-<br>
-<input type="checkbox" name="effects" id="effects" value="effects" onclick="textEffects();">Text Effects
-<br>
-<br>
-<hr>
-<a href="index.html#" onclick="deleteGame()">Delete
-Current Game<br>
-(Restart Browser Required)</a>
-</div>
-<div class="button3" id="iframeButton" onclick="toggleVisit();" style="left: 125px; width: 150px; index: 50; display: none;">Visit Earth</div>
-<div id="iframe" class="iframe" style="display: none;"><iframe style="width: 800px; height: 320px;" src="earth.html" scrolling="no"></iframe> </div>
-<img id="firstClick" style="position: fixed; top: 0px; left: 20%; z-index: 20;" src="images/click-earth.png">
-<!-- <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FTheResourceGame&send=false&layout=box_count&width=100&show_faces=false&share=true&action=like&colorscheme=light&font=verdana&height=100" style="border: medium none ; overflow: hidden; width: 52px; height: 100px; position: fixed; left: 0px; top: 35px; z-index: 6;" allowtransparency="true" frameborder="0" scrolling="no"></iframe> -->
-<div class="advert" style="display: block;"><div style="position: absolute; top: 0px;"><!-- Ad Here -->
-<!-- <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-<!-- Resource Banner -->
-<!-- <ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-7676680301261177"
-     data-ad-slot="4645135925"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script> -->
-</div>
-</div>
-<div style="text-align: center; font-size: 12px; position: absolute; top: 700px; color: white;">©2013 Shmoggo.com - <a target="_blank" href="terms.html">Terms and Conditions</a></div>
-
-</body></html>
+</html>
