@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8"
+ http-equiv="content-type">
+ <meta name="robots" content="nofollow" />
+  <title>The Resource Game | Earth</title>
+  <link rel="stylesheet" href="custom_font/specimen_files/specimen_stylesheet.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="custom_font/stylesheet.css" type="text/css" charset="utf-8">
+  <style type="text/css">body
+{
+background-image: url('http://www.shmoggo.com/resource-game/images/earth-background.png');
+background-repeat: no-repeat;
+font-family: 'komika_axisregular';
+font-size: 11px;
+}
+.button {
+text-align: center;
+height: 20px;
+width: 100px;
+position: fixed;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(25, 185, 105);
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+z-index: 10;
+font-size: 14px;
+}
+.button:hover
+{
+position: fixed;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(35, 225, 135);
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+.button:active
+{
+position: fixed;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(20, 143, 83);
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+  </style>
+  <script type="text/javascript">
+  
+function reloadPage()
+{
+var myNode = document.getElementById("holder");
+myNode.innerHTML = '';
+firstRun();
+}
+  
+function numberWithCommas(x) {
+return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function firstRun()
+{
+var rnd = Math.random();
+var rnd2 = Math.floor((Math.random()*1000)+1); 
+//
+if (rnd < .95) {
+var rate1 = Math.floor((Math.random()*7)+1); 
+var amount1 = 0;
+var timerId1 = setInterval(function () {
+randomWood();
+amount1++;
+if(amount1 === rate1) {
+clearInterval(timerId1);
+}
+}, 1 * 1);
+}
+//
+if (rnd < .35) {
+var rate2 = Math.floor((Math.random()*5)+1); 
+var amount2 = 0;
+var timerId2 = setInterval(function () {
+randomIron();
+amount2++;
+if(amount2 === rate2) {
+clearInterval(timerId2);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd < .30) {
+var rate3 = Math.floor((Math.random()*4)+1); 
+var amount3 = 0;
+var timerId3 = setInterval(function () {
+randomCopper();
+amount3++;
+if(amount3 === rate3) {
+clearInterval(timerId3);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd < .1) {
+var rate4 = Math.floor((Math.random()*2)+1); 
+var amount4 = 0;
+var timerId4 = setInterval(function () {
+randomGold();
+amount4++;
+if(amount4 === rate4) {
+clearInterval(timerId4);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd < .01) {
+var rate5 = Math.floor((Math.random()*1)+1); 
+var amount5 = 0;
+var timerId5 = setInterval(function () {
+randomDiamond();
+amount5++;
+if(amount5 === rate5) {
+clearInterval(timerId5);
+}
+}, 1 * 1);
+}
+//
+//Rare Gems
+//
+if (rnd2 == 496) {
+var rate6 = Math.floor((Math.random()*1)+1); 
+var amount6 = 0;
+var timerId6 = setInterval(function () {
+randomBenitoite();
+amount6++;
+if(amount6 === rate6) {
+clearInterval(timerId6);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd2 == 497) {
+var rate7 = Math.floor((Math.random()*1)+1); 
+var amount7 = 0;
+var timerId7 = setInterval(function () {
+randomBlackOpal();
+amount7++;
+if(amount7 === rate7) {
+clearInterval(timerId7);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd2 == 498) {
+var rate8 = Math.floor((Math.random()*1)+1); 
+var amount8 = 0;
+var timerId8 = setInterval(function () {
+randomEmerald();
+amount8++;
+if(amount8 === rate8) {
+clearInterval(timerId8);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd2 == 499) {
+var rate9 = Math.floor((Math.random()*1)+1); 
+var amount9 = 0;
+var timerId9 = setInterval(function () {
+randomPainite();
+amount9++;
+if(amount9 === rate9) {
+clearInterval(timerId9);
+}
+}, 1 * 1);
+}
+//
+//
+//
+if (rnd2 == 500) {
+var rate10 = Math.floor((Math.random()*1)+1); 
+var amount10 = 0;
+var timerId10 = setInterval(function () {
+randomRedDiamond();
+amount10++;
+if(amount10 === rate10) {
+clearInterval(timerId10);
+}
+}, 1 * 1);
+}
+}
+//
+//
+//
+function randomWood()
+{
+var amount = Math.floor((Math.random()*5)+1); 
+var randomNumber2=Math.floor(Math.random()*35)*20;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "100px";
+div.style.height = "86px";
+div.style.top = "0px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/tree-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.style.color = "white";
+div.innerHTML = amount+"k";
+div.onclick = function(){var value = parent.document.getElementById('wood').value;
+var value = value.replace(/,/g, '');
+var value = parseInt(value, 10);
+value -= -amount*1000;
+parent.document.getElementById('wood').value = numberWithCommas(value);
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomIron()
+{
+var amount = Math.floor((Math.random()*5)+1); 
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/iron-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.style.color = "black";
+div.innerHTML = amount+"k";
+div.onclick = function(){var value = parent.document.getElementById('iron').value;
+var value = value.replace(/,/g, '');
+var value = parseInt(value, 10);
+value -= -amount*1000;
+parent.document.getElementById('iron').value = numberWithCommas(value);
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomCopper()
+{
+var amount = Math.floor((Math.random()*5)+1); 
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/copper-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.style.color = "white";
+div.innerHTML = amount+"k";
+div.onclick = function(){var value = parent.document.getElementById('copper').value;
+var value = value.replace(/,/g, '');
+var value = parseInt(value, 10);
+value -= -amount*1000;
+parent.document.getElementById('copper').value = numberWithCommas(value);
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomGold()
+{
+var amount = Math.floor((Math.random()*5)+1); 
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/gold-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.style.color = "black";
+div.innerHTML = amount+"k";
+div.onclick = function(){var value = parent.document.getElementById('gold').value;
+var value = value.replace(/,/g, '');
+var value = parseInt(value, 10);
+value -= -amount*1000;
+parent.document.getElementById('gold').value = numberWithCommas(value);
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomDiamond()
+{
+var amount = Math.floor((Math.random()*5)+1); 
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/diamond-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.style.color = "black";
+div.innerHTML = amount+"k";
+div.onclick = function(){var value = parent.document.getElementById('diamond').value;
+var value = value.replace(/,/g, '');
+var value = parseInt(value, 10);
+value -= -amount*1000;
+parent.document.getElementById('diamond').value = numberWithCommas(value);
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomBenitoite()
+{
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/benitoite-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.onclick = function(){var value = parent.document.getElementById('benitoite').value;
+var value = parseInt(value, 10);
+value -= -1;
+parent.document.getElementById('benitoite').value = value;
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomBlackOpal()
+{
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/black-opal-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.onclick = function(){var value = parent.document.getElementById('blackOpal').value;
+var value = parseInt(value, 10);
+value -= -1;
+parent.document.getElementById('blackOpal').value = value;
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomEmerald()
+{
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/emerald-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.onclick = function(){var value = parent.document.getElementById('emerald').value;
+var value = parseInt(value, 10);
+value -= -1;
+parent.document.getElementById('emerald').value = value;
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomPainite()
+{
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/painite-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.onclick = function(){var value = parent.document.getElementById('painite').value;
+var value = parseInt(value, 10);
+value -= -1;
+parent.document.getElementById('painite').value = value;
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+function randomRedDiamond()
+{
+var randomNumber1=Math.floor(Math.random()*4.5)*40;
+var randomNumber2=Math.floor(Math.random()*20)*40;
+randomNumber1 -= -120;
+var div = document.createElement("div");
+div.style.position = "absolute";
+div.style.width = "40px";
+div.style.height = "26px";
+div.style.top = randomNumber1+"px";
+div.style.left = randomNumber2+"px";
+div.style.display = "block";
+div.style.backgroundImage="url('images/red-diamond-icon.png')";
+div.style.textAlign = "center";
+div.style.paddingTop = "14px";
+div.onclick = function(){var value = parent.document.getElementById('redDiamond').value;
+var value = parseInt(value, 10);
+value -= -1;
+parent.document.getElementById('redDiamond').value = value;
+this.style.display = "none";};
+document.getElementById('holder').appendChild(div);
+}
+  </script>
+</head>
+<body onload="firstRun();">
+<div id="holder" style="position: absolute; height: 500px; width: 800px; top: 0px;
+left: 0px;">
+</div>
+<div class="button" onclick="reloadPage();">New Area</div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+html, body
+{
+font-family: 'komika_axisregular';
+background-image: url('../images/static-background.png');
+height: 100%;
+
+}
+.rounded {
+-moz-border-radius: 15px;
+border-radius: 15px;
+border: 2px solid silver;
+padding: 10px;
+}
+.rounded_half {
+-moz-border-top-left-radius: 15px;
+border-top-left-radius: 15px;
+-moz-border-bottom-left-radius: 15px;
+border-bottom-left-radius: 15px;
+border-top: 2px solid silver;
+border-left: 2px solid silver;
+border-bottom: 2px solid silver;
+padding: 10px;
+}
+.menu {
+padding: 5px;
+font-size: 12px;
+border: 0px solid black;
+width: 90%;
+}
+.menu input[type=text] {
+font-size: 16px;
+}
+.objective {
+padding: 5px;
+width: 90%;
+background-color: rgb(240, 240, 240);
+border: 2px solid silver;
+}
+.menu_holder {
+border: 2px solid silver;
+padding: 0px;
+box-shadow: 0px 0px 5px #555555;
+}
+.button {
+-moz-border-radius: 5px;
+border-radius: 5px;
+font-family: 'komika_axisregular';
+color: white;
+background-color: rgb(25, 185, 95);
+}
+.button2 {
+color: white;
+background-color: rgb(25, 185, 105);
+border-top-left-radius: 10px;
+-moz-border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+-moz-border-top-right-radius: 10px;
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+.button2:hover
+{
+color: white;
+background-color: rgb(35, 225, 135);
+border-top-left-radius: 10px;
+-moz-border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+-moz-border-top-right-radius: 10px;
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+.button2:active
+{
+color: white;
+background-color: rgb(20, 143, 83);
+border-top-left-radius: 10px;
+-moz-border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+-moz-border-top-right-radius: 10px;
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+.input {
+border-width: 0px;
+background-color: transparent;
+text-align: left;
+font-family: 'komika_axisregular';
+font-size: 12px;
+width: 100px;
+}
+.hidden {
+font-size: 12px;
+text-align: left;
+display: none;
+background-color: black;
+color: white;
+position: fixed;
+top: 40%;
+left: 15%;
+width: 200px;
+padding: 20px;
+border: 2px solid silver;
+-moz-border-radius: 15px;
+border-radius: 15px;
+opacity:0.95;
+filter:alpha(opacity=95);
+box-shadow: 0px 0px 10px #ffffff;
+z-index: 15;
+line-height: 110%;
+}
+.menu:hover + div {
+display: block;
+}
+.rotate {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 120px;
+height: 120px;
+margin:-60px 0 0 -60px;
+-webkit-animation:spin 50s linear infinite;
+-moz-animation:spin 50s linear infinite;
+animation:spin 50s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+.earth
+{
+-webkit-transform:scale(1.0);
+-moz-transform:scale(1.0);
+-ms-transform:scale(1.0);
+-o-transform:scale(1.0);
+transform:scale(1.0);
+-webkit-transition-duration: 0.1s;
+-moz-transition-duration: 0.1s;
+-ms-transition-duration: 0.1s;
+-o-transition-duration: 0.1s;
+transition-duration: 0.1s;
+}
+.earth:hover {
+-webkit-transform:scale(1.1); -moz-transform:scale(1.1);
+-ms-transform:scale(1.1);
+-o-transform:scale(1.1);
+transform:scale(1.1);
+}
+.earth:active {
+-webkit-transform:scale(1.0); -moz-transform:scale(1.0);
+-ms-transform:scale(1.0);
+-o-transform:scale(1.0);
+transform:scale(1.0);
+}
+.game_save {
+font-size: 14px;
+text-align: center;
+display: none;
+background-color: black;
+color: white;
+position: fixed;
+left: 40%;
+width: 200px;
+padding: 20px;
+border: 2px solid silver;
+-moz-border-radius: 15px;
+border-radius: 15px;
+opacity:0.6;
+filter:alpha(opacity=60);
+box-shadow: 0px 0px 10px #ffffff;
+z-index: 6;
+}
+.button3 {
+text-align: center;
+height: 20px;
+width: 100px;
+position: fixed;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(25, 185, 105);
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+z-index: 10;
+}
+.button3:hover
+{
+position: fixed;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(35, 225, 135);
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+.button3:active
+{
+position: fixed;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(20, 143, 83);
+padding: 5px;
+border: 2px solid rgb(18, 134, 78);
+}
+.button4 {
+text-align: center;
+width: 100px;
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(63, 118, 203);
+border: 2px solid rgb(155, 145, 90);
+z-index: 10;
+padding: 10px;
+vertical-align: middle;
+}
+.button4:hover
+{
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(105, 145, 215);
+border: 2px solid rgb(155, 145, 90);
+}
+.button4:active
+{
+top: 0px;
+left: 0px;
+color: white;
+background-color: rgb(50, 103, 190);
+border: 2px solid rgb(155, 145, 90);
+}
