@@ -13,7 +13,7 @@ var value = parseInt(value, 10);
 var superSawAmount = value;
 
 if (superSawAmount >= lumberjackAmount) {
-document.getElementById('alert').innerHTML = '需要更多的伐木工人！';
+document.getElementById('alert').innerHTML = '需要更多的伐木工！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
@@ -225,7 +225,7 @@ var value = parseInt(value, 10);
 var goldFishAmount = value;
 
 if (goldFishAmount >= goldMinerAmount) {
-document.getElementById('alert').innerHTML = '需要更多的金矿！';
+document.getElementById('alert').innerHTML = '需要更多的金矿工！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
@@ -280,7 +280,7 @@ var value = parseInt(value, 10);
 var moleculeAmount = value;
 
 if (moleculeAmount >= jewelerAmount) {
-document.getElementById('alert').innerHTML = 'Need more Jewelers!';
+document.getElementById('alert').innerHTML = '需要更多的珠宝商！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else

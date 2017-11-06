@@ -227,7 +227,7 @@ document.getElementById('ironGoldPanCost').value = numberWithCommas(value);
 }}
 else
 {
-document.getElementById('alert').innerHTML = '需要更多的金矿！';
+document.getElementById('alert').innerHTML = '需要更多的金矿工！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;}
@@ -283,7 +283,7 @@ document.getElementById('ironChiselCost').value = numberWithCommas(value);
 }}
 else
 {
-document.getElementById('alert').innerHTML = 'Need more Jewelers!';
+document.getElementById('alert').innerHTML = '需要更多的珠宝商！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;}

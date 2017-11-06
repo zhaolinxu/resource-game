@@ -194,7 +194,7 @@ var value = parseInt(value, 10);
 var smelteryAmount = value;
 
 if (smelteryAmount >= goldMinerAmount) {
-document.getElementById('alert').innerHTML = '需要更多的金矿！';
+document.getElementById('alert').innerHTML = '需要更多的金矿工！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
@@ -249,7 +249,7 @@ var value = parseInt(value, 10);
 var gemStationAmount = value;
 
 if (gemStationAmount >= jewelerAmount) {
-document.getElementById('alert').innerHTML = 'Need more Jewelers!';
+document.getElementById('alert').innerHTML = '需要更多的珠宝商！';
 document.getElementById('alert').style.display = 'block';
 setTimeout(function(){document.getElementById('alert').style.display = 'none'}, 3000);
 return;} else
